@@ -4,10 +4,24 @@ declare(strict_types=1);
 
 namespace {{ namespace }};
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Database\Factories\{{ class }}Factory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 
 class {{ class }} extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+      //
+    ];
+
+    protected $casts = [];
+
+    protected static function newFactory(): Factory
+    {
+        return new {{ class }}Factory();
+    }
 }
