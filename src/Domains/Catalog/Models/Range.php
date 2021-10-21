@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Domains\Catalog\Models;
 
 use Database\Factories\RangeFactory;
-use Illuminate\Database\Eloquent\Factories\Factory;
+use Domains\Catalog\Models\Builder\RangeBuilder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -28,8 +31,23 @@ class Range extends Model
         'active' => 'boolean'
     ];
 
+    public function products(): HasMany
+    {
+        return $this->hasMany(
+            related: Product::class,
+            foreignKey: 'range_id'
+        );
+    }
+
     protected static function newFactory(): Factory
     {
         return new RangeFactory();
+    }
+
+    public function newEloquentBuilder($query): Builder
+    {
+        return  new RangeBuilder(
+            query: $query
+        );
     }
 }
