@@ -4,15 +4,17 @@ declare(strict_types=1);
 
 namespace Domains\Customer\Models;
 
-use Database\Factories\UserFactory;
-use Domains\Shared\Models\Concerns\HasUuid;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use Domains\Customer\Models\Cart;
 use Laravel\Sanctum\HasApiTokens;
+use Database\Factories\UserFactory;
+use Illuminate\Notifications\Notifiable;
+use Domains\Shared\Models\Concerns\HasUuid;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
@@ -56,6 +58,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(
             related: Address::class,
+            foreignKey: 'user_id'
+        );
+    }
+
+    public function cart(): HasOne
+    {
+        return $this->hasOne(
+            related: Cart::class,
             foreignKey: 'user_id'
         );
     }

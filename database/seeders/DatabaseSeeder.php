@@ -8,6 +8,7 @@ use Illuminate\Database\Seeder;
 use Domains\Catalog\Models\Product;
 use Domains\Catalog\Models\Variant;
 use Domains\Customer\Models\Address;
+use Domains\Customer\Models\Cart;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
         // Range::factory(10)->create();
         // Product::factory(50)->create();
         Variant::factory(50)->create();
+        Cart::factory(10)->create();
     }
 }
