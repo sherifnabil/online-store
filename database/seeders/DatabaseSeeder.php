@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use Domains\Catalog\Models\Category;
-use Domains\Catalog\Models\Product;
-use Domains\Catalog\Models\Range;
-use Domains\Customer\Models\Address;
 use Illuminate\Database\Seeder;
-use Domains\Customer\Models\Location;
+use Domains\Catalog\Models\Product;
+use Domains\Catalog\Models\Variant;
+use Domains\Customer\Models\Address;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,5 +17,6 @@ class DatabaseSeeder extends Seeder
         // Category::factory(10)->create();
         // Range::factory(10)->create();
         Product::factory(50)->create();
+        Variant::factory(50)->create();
     }
 }

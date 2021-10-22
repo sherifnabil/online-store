@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Domains\Catalog\Models;
 
 use Database\Factories\CategoryFactory;
-use Domains\Catalog\Models\Builder\CategoryBuilder;
+use Domains\Catalog\Models\Builders\CategoryBuilder;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Model;
