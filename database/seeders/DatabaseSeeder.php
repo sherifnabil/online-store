@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         Address::factory()->create();
         // Category::factory(10)->create();
         // Range::factory(10)->create();
-        Product::factory(50)->create();
+        // Product::factory(50)->create();
         Variant::factory(50)->create();
     }
 }

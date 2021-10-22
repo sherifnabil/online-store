@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -48,6 +49,14 @@ class Product extends Model
         return $this->belongsTo(
             related: Range::class,
             foreignKey:'range_id'
+        );
+    }
+
+    public function variants(): HasMany
+    {
+        return $this->hasMany(
+            related: Variant::class,
+            foreignKey:'product_id'
         );
     }
 
