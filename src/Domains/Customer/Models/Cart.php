@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Model
 {
@@ -31,16 +32,24 @@ class Cart extends Model
         'status'    =>  CartStatus::class . ':nullable',
     ];
 
-    protected static function newFactory(): Factory
-    {
-        return new CartFactory();
-    }
-
     public function user(): BelongsTo
     {
         return $this->belongsTo(
             related: User::class,
             foreignKey: 'user_id'
         );
+    }
+
+    public function items(): HasMany
+    {
+        return $this->hasMany(
+            related: CartItem::class,
+            foreignKey:'cart_id'
+        );
+    }
+
+    protected static function newFactory(): Factory
+    {
+        return new CartFactory();
     }
 }
