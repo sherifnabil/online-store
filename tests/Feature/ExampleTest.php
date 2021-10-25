@@ -1,21 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Tests\TestCase;
+use Illuminate\Http\Response;
 
-class ExampleTest extends TestCase
-{
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
-    public function test_example()
-    {
-        $response = $this->get('/');
+use function Pest\Laravel\get;
 
-        $response->assertStatus(200);
-    }
-}
+it('reciveis a HTTP OK on the home page', function () {
+    get(
+        uri: route(name:'home')
+    )->assertStatus(
+        status: Response::HTTP_OK
+    );
+});
