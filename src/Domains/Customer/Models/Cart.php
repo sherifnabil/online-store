@@ -7,6 +7,7 @@ namespace Domains\Customer\Models;
 use Domains\Customer\Models\User;
 use Database\Factories\CartFactory;
 use Domains\Customer\States\Statuses\CartStatus;
+use Domains\Shared\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
@@ -16,11 +17,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Model
 {
-    use HasKey;
+    use HasUuid;
     use HasFactory;
 
     protected $fillable = [
-        'key',
+        'uuid',
         'status',
         'coupon',
         'total',
