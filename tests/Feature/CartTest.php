@@ -1,10 +1,12 @@
 <?php
 
-use Domains\Customer\States\Statuses\CartStatus;
-use Illuminate\Http\Response;
-use Illuminate\Testing\Fluent\AssertableJson;
-
+use function Pest\Laravel\get;
 use function Pest\Laravel\post;
+
+use Illuminate\Http\Response;
+use Domains\Customer\Models\Cart;
+use Illuminate\Testing\Fluent\AssertableJson;
+use Domains\Customer\States\Statuses\CartStatus;
 
 it('creates a cart for an unauthenticated user', function () {
     post(
@@ -19,5 +21,18 @@ it('creates a cart for an unauthenticated user', function () {
             ->where('type', 'cart')
             ->where('attributes.status', CartStatus::pending()->label)
             ->etc()
+    );
+});
+
+it('returns a cart for a loggedin user', function () {
+    $cart = Cart::factory()->create();
+
+    auth()->loginUsingId($cart->user_id);
+
+    get(
+        uri: route('api:v1:carts:index')
+    )
+    ->assertStatus(
+        status: Response::HTTP_OK
     );
 });
