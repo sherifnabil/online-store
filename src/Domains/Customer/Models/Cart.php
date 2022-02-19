@@ -8,16 +8,19 @@ use Domains\Customer\Models\User;
 use Database\Factories\CartFactory;
 use Domains\Customer\States\Statuses\CartStatus;
 use Domains\Shared\Models\Concerns\HasUuid;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Cart extends Model
 {
     use HasUuid;
+    use Prunable;
     use HasFactory;
 
     protected $fillable = [
@@ -47,6 +50,11 @@ class Cart extends Model
             related: CartItem::class,
             foreignKey:'cart_id'
         );
+    }
+
+    public function prunable(): Builder
+    {
+        return static::query()->where('cretaed_at', '<=', now()->subMonth());
     }
 
     protected static function newFactory(): Factory
