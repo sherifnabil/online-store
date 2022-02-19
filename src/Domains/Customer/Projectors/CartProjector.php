@@ -40,7 +40,7 @@ class CartProjector extends Projector
             ->delete();
     }
 
-    public function onIncreaseQuantity(IncreaseCartQuantity $event): void
+    public function onIncreaseCartQuantity(IncreaseCartQuantity $event): void
     {
         $item = CartItem::query()
         ->where(
@@ -56,7 +56,7 @@ class CartProjector extends Projector
         ]);
     }
 
-    public function onDecreaseQuantity(DecreaseCartQuantity $event): void
+    public function onDecreaseCartQuantity(DecreaseCartQuantity $event): void
     {
         $item = CartItem::query()
         ->where(
