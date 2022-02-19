@@ -36,3 +36,12 @@ it('returns a cart for a loggedin user', function () {
         status: Response::HTTP_OK
     );
 });
+
+it('return a not found status when a guest tries to retrive their carts', function () {
+    get(
+        uri: route('api:v1:carts:index')
+    )
+    ->assertStatus(
+        status: Response::HTTP_NO_CONTENT
+    );
+});
