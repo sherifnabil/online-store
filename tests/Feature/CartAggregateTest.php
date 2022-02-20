@@ -27,7 +27,7 @@ it('Can store an event for adding a product ', function () {
     )
     ->when(
         callable: function (CartAggregate $cartAggregate) use ($product, $cart): void {
-            $cartAggregate->addToCart(
+            $cartAggregate->addProduct(
                 purchasableID: $product->id,
                 cartID: $cart->id,
                 type: Cart::class

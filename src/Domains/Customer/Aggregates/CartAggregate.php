@@ -12,7 +12,7 @@ use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 
 class CartAggregate extends AggregateRoot
 {
-    public function addToCart(int $purchasableID, int $cartID, string $type): self
+    public function addProduct(int $purchasableID, int $cartID, string $type): self
     {
         $this->recordThat(
             domainEvent: new ProductWasAddedToCart(
