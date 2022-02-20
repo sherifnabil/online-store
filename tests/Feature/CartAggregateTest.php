@@ -34,7 +34,11 @@ it('Can store an event for adding a product ', function () {
             );
         }
     )
-    ->assertEventRecorded(
-        expectedEvent: $event
+    ->assertRecorded(
+        expectedEvents: new ProductWasAddedToCart(
+            purchasableID: $product->id,
+            cartID: $cart->id,
+            type: Cart::class,
+        )
     );
 });
