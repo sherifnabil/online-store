@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class {{ class }} extends FormRequest
 {
-    public function authorize(): boll
+    public function authorize(): bool
     {
         return true;
     }
