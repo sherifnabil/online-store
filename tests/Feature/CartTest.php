@@ -39,7 +39,7 @@ it('returns a cart for a loggedin user', function () {
     );
 });
 
-it('return a not found status when a guest tries to retrive their carts', function () {
+it('return a no content when a guest tries to retrive their carts', function () {
     get(
         uri: route('api:v1:carts:index')
     )
