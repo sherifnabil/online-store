@@ -15,7 +15,7 @@ class StoreController extends Controller
     public function __invoke(ProductRequest $request, Cart $cart): Response
     {
         CartAggregate::retrieve(
-            uuid: $request->get('uuid')
+            uuid: $cart->uuid
         )->addProduct(
             purchasableID: $request->get('purchasable_id'),
             cartID: $cart->id,

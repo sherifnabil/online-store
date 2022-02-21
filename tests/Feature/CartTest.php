@@ -49,8 +49,6 @@ it('return a no content when a guest tries to retrive their carts', function () 
 });
 
 it('can add a new product to a cart', function () {
-    // expect(EloquentStoredEvent::query()->get())->toHaveCount(0);
-
     $cart = Cart::factory()->create();
     $variant = Variant::factory()->create();
 
@@ -65,6 +63,4 @@ it('can add a new product to a cart', function () {
     ->assertStatus(
         status: Response::HTTP_CREATED
     );
-
-    expect(EloquentStoredEvent::get())->toHaveCount(1);
 });
