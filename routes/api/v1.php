@@ -54,10 +54,10 @@ Route::prefix('carts')->as('carts:')->group(function () {
     /**
      * Update Quantity
     */
-    Route::patch('{cart}/products/{cartItem}', UpdateController::class)->name('products:update');
+    Route::patch('{cart:uuid}/products/{item:uuid}', UpdateController::class)->name('products:update');
 
     /**
      * Delete Product
     */
-    Route::delete('{cart}/products/{cartItem}', DeleteController::class)->name('products:delete');
+    Route::delete('{cart:uuid}/products/{item:uuid}', DeleteController::class)->name('products:delete');
 });
