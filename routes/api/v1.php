@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\V1\Carts\IndexController;
 use App\Http\Controllers\Api\V1\Carts\CreateController;
 use App\Http\Controllers\Api\V1\Products\ShowController;
 use App\Http\Controllers\Api\V1\Carts\Products\StoreController;
+use App\Http\Controllers\Api\V1\Carts\Coupons\StoreController as CouponsStoreController;
 use App\Http\Controllers\Api\V1\Carts\Products\DeleteController;
 use App\Http\Controllers\Api\V1\Carts\Products\UpdateController;
 use App\Http\Controllers\Api\V1\Products\IndexController as ProductsIndexController;
@@ -60,4 +61,9 @@ Route::prefix('carts')->as('carts:')->group(function () {
      * Delete Product
     */
     Route::delete('{cart:uuid}/products/{item:uuid}', DeleteController::class)->name('products:delete');
+
+    /**
+     *  Add Coupon to our Cart
+    */
+    Route::post('{cart:uuid}/coupons', CouponsStoreController::class)->name('coupons:store');
 });
