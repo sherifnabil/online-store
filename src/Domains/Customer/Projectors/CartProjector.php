@@ -19,11 +19,11 @@ class CartProjector extends Projector
     public function onProductWasAddedToCart(ProductWasAddedToCart $event): void
     {
         $cart = Cart::query()->find(
-            id: $event->cartID
+            $event->cartID
         );
 
         $cart->items()->create([
-            'purchasable_id'    =>  $event->productID,
+            'purchasable_id'    =>  $event->purchasableID,
             'purchasable_type'  =>  $event->type,
         ]);
     }
@@ -31,7 +31,7 @@ class CartProjector extends Projector
     public function onProductWasRemovedFromCart(ProductWasRemovedFromCart $event): void
     {
         $cart = Cart::query()->find(
-            id: $event->cartID
+            $event->cartID
         );
 
         $cart->items()
@@ -44,11 +44,11 @@ class CartProjector extends Projector
     {
         $item = CartItem::query()
         ->where(
-            column: 'cart_id',
-            value: $event->cartID
+            'cart_id',
+            $event->cartID
         )->where(
-            column: 'id',
-            value: $event->cartItemID
+            'id',
+            $event->cartItemID
         )->first();
 
         $item->update([
@@ -60,12 +60,14 @@ class CartProjector extends Projector
     {
         $item = CartItem::query()
         ->where(
-            column: 'cart_id',
-            value: $event->cartID
-        )->where(
-            column: 'id',
-            value: $event->cartItemID
+            'cart_id',
+            $event->cartID
+        )
+        ->where(
+            'id',
+            $event->cartItemID
         )->first();
+
 
         if ($event->quantity >= $item->quantity) {
             CartAggregate::retrieve(
