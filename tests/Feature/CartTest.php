@@ -8,10 +8,7 @@ use Domains\Customer\Models\Cart;
 
 use function Pest\Laravel\delete;
 use Domains\Catalog\Models\Variant;
-use Domains\Customer\Models\Coupon;
 use Domains\Customer\Models\CartItem;
-use function Pest\Laravel\assertDeleted;
-use Domains\Customer\Events\CouponWasAppied;
 use Illuminate\Testing\Fluent\AssertableJson;
 use Domains\Customer\States\Statuses\CartStatus;
 use Domains\Customer\Events\DecreaseCartQuantity;
@@ -155,29 +152,4 @@ it('can remove an item from the cat', function () {
 
     // assertDeleted($item);
     expect(EloquentStoredEvent::query()->orderBy('id', 'desc')->first()->event_class)->toEqual(ProductWasRemovedFromCart::class);
-});
-
-it('can apply coupon to the cart', function () {
-    $cart = Cart::factory()->create();
-    $coupon = Coupon::factory()->create();
-
-    expect($cart)
-    ->reduction->toEqual(0);
-
-    post(
-        uri: route('api:v1:carts:coupons:store', $cart->uuid),
-        data: [
-            'code'  =>  $coupon->code
-        ]
-    )->assertStatus(
-        status: Response::HTTP_ACCEPTED
-    );
-
-    expect(
-        Cart::query()->find($cart->id)
-    )
-    ->reduction->toEqual($coupon->reduction)
-    ->coupon->toEqual($coupon->code);
-
-    expect(EloquentStoredEvent::query()->orderBy('id', 'desc')->first()->event_class)->toEqual(CouponWasAppied::class);
 });
