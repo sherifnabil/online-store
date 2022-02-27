@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         // Product::factory(50)->create();
         // Variant::factory(50)->create();
         Cart::factory(10)->create();
-        OrderLine::factory(20)->create();
+        // OrderLine::factory(20)->create();
         Coupon::factory(20)->create();
     }
 }
