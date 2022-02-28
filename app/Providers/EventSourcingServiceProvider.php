@@ -6,6 +6,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Domains\Customer\Projectors\CartProjector;
+use Domains\Customer\Projectors\OrderProjector;
 use Spatie\EventSourcing\Facades\Projectionist;
 
 class EventSourcingServiceProvider extends ServiceProvider
@@ -13,7 +14,8 @@ class EventSourcingServiceProvider extends ServiceProvider
     public function register(): void
     {
         Projectionist::addProjectors([
-            CartProjector::class
+            CartProjector::class,
+            OrderProjector::class,
         ]);
     }
 

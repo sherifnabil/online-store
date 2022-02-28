@@ -33,8 +33,8 @@ class Order extends Model
     ];
 
     protected $casts = [
-        'shipping_id'   =>  'datetime',
-        'billing_id'    =>  'datetime',
+        'shipping_id'   =>  'integer',
+        'billing_id'    =>  'integer',
     ];
 
     public function user(): BelongsTo
