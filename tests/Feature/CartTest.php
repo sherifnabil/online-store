@@ -72,7 +72,7 @@ it('can add a new product to a cart', function () {
 });
 
 it('can increase the quantity of an item in the cart', function () {
-    // expect(EloquentStoredEvent::query()->get())->toHaveCount(0);
+    expect(EloquentStoredEvent::query()->get())->toHaveCount(0);
 
     $item = CartItem::factory()->create(['quantity' =>  1]);
 
@@ -89,12 +89,12 @@ it('can increase the quantity of an item in the cart', function () {
         status: Response::HTTP_ACCEPTED
     );
 
-    // expect(EloquentStoredEvent::query()->get())->toHaveCount(1);
+    expect(EloquentStoredEvent::query()->get())->toHaveCount(1);
     expect(EloquentStoredEvent::query()->orderBy('id', 'desc')->first()->event_class)->toEqual(IncreaseCartQuantity::class);
 });
 
 it('can decrease the quantity of an item in the cart', function () {
-    // expect(EloquentStoredEvent::query()->get())->toHaveCount(0);
+    expect(EloquentStoredEvent::query()->get())->toHaveCount(0);
 
     $item = CartItem::factory()->create(['quantity' =>  3]);
 
@@ -111,7 +111,7 @@ it('can decrease the quantity of an item in the cart', function () {
         status: Response::HTTP_ACCEPTED
     );
 
-    // expect(EloquentStoredEvent::query()->get())->toHaveCount(1);
+    expect(EloquentStoredEvent::query()->get())->toHaveCount(1);
     expect(EloquentStoredEvent::query()->orderBy('id', 'desc')->first()->event_class)->toEqual(DecreaseCartQuantity::class);
 });
 
@@ -131,7 +131,7 @@ it('remove the item from the cart when quantity is zero', function () {
         status: Response::HTTP_ACCEPTED
     );
 
-    // expect(EloquentStoredEvent::query()->get())->toHaveCount(1);
+    expect(EloquentStoredEvent::query()->get())->toHaveCount(1);
     expect(EloquentStoredEvent::query()->orderBy('id', 'desc')->first()->event_class)->toEqual(ProductWasRemovedFromCart::class);
 });
 
