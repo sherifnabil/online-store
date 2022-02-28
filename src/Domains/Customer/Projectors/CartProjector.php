@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\Coupon;
 use Domains\Customer\Models\CartItem;
+use Illuminate\Database\Eloquent\Model;
 use Domains\Customer\Events\CouponWasAppied;
 use Domains\Customer\Aggregates\CartAggregate;
 use Domains\Customer\Events\DecreaseCartQuantity;
@@ -24,9 +25,13 @@ class CartProjector extends Projector
             $event->cartID
         );
 
-        $cart->items()->create([
+        $item = $cart->items()->create([
             'purchasable_id'    =>  $event->purchasableID,
             'purchasable_type'  =>  $event->type,
+        ]);
+
+        $cart->update([
+            'total' =>  $item->purchasable->retail
         ]);
     }
 
@@ -36,9 +41,30 @@ class CartProjector extends Projector
             $event->cartID
         );
 
-        $cart->items()
-            ->where('purchasable_id', $event->purchasableID)
-            ->where('purchasable_type', $event->type)
+        $items = CartItem::query()
+            ->with(['purchasable'])
+            ->get();
+
+        $item =  $items->filter(
+            fn (Model $item) =>
+            $item->id === $event->purchasableID
+        )
+        ->first();
+
+        if ($cart->count() === 1) {
+            $cart->update([
+                'total' => 0
+            ]);
+        } else {
+            $cart->update([
+                'total' => ($cart->total - $item->purchasable->retail)
+            ]);
+        }
+
+        $cart
+            ->items()
+            ->where('purchasable_id', $item->purchasable->id)
+            ->where('purchasable_type', strtolower(class_basename($item->purchasable)))
             ->delete();
     }
 
