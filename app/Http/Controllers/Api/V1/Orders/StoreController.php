@@ -7,8 +7,8 @@ namespace App\Http\Controllers\Api\V1\Orders;
 use Illuminate\Support\Str;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
-use Domains\Customer\Aggregates\OrderAggregate;
 use App\Http\Requests\Api\V1\Orders\StoreRequest;
+use Domains\Fulfillment\Aggregates\OrderAggregate;
 
 class StoreController extends Controller
 {

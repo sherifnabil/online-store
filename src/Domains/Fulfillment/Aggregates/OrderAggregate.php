@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Aggregates;
+namespace Domains\Fulfillment\Aggregates;
 
-use Domains\Customer\Events\OrderWasCreated;
+use Domains\Fulfillment\Events\OrderWasCreated;
 use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 
 class OrderAggregate extends AggregateRoot

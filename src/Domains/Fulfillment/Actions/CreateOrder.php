@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Actions;
+namespace Domains\Fulfillment\Actions;
 
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
 use Domains\Fulfillment\Models\Order;
-use Domains\Customer\States\Statuses\OrderStatus;
-use Domains\Customer\ValueObjects\OrderValueObject;
+use Domains\Fulfillment\States\Statuses\OrderStatus;
+use Domains\Fulfillment\ValueObjects\OrderValueObject;
 
 class CreateOrder
 {

@@ -7,7 +7,7 @@ use Domains\Customer\Models\CartItem;
 use Domains\Customer\Models\Location;
 use Domains\Fulfillment\Models\Order;
 
-use Domains\Customer\Events\OrderWasCreated;
+use Domains\Fulfillment\Events\OrderWasCreated;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 
 it('can create an order from a cart for an unauthenticated user', function () {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
+use Domains\Customer\Models\User;
 use Domains\Customer\Models\CartItem;
 use Domains\Customer\Models\Location;
-use Domains\Customer\Events\OrderWasCreated;
-use Domains\Customer\Aggregates\OrderAggregate;
-use Domains\Customer\Models\User;
+use Domains\Fulfillment\Events\OrderWasCreated;
+use Domains\Fulfillment\Aggregates\OrderAggregate;
 
 it('can create an order for an unauthenticated user', function () {
     $item = CartItem::factory()->create(['quantity'   =>  3]);

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\ValueObjects;
+namespace Domains\Fulfillment\ValueObjects;
 
 class OrderValueObject
 {

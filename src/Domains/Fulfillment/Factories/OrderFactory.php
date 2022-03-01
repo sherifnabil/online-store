@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Factories;
+namespace Domains\Fulfillment\Factories;
 
-use Domains\Customer\ValueObjects\OrderValueObject;
+use Domains\Fulfillment\ValueObjects\OrderValueObject;
 
 class OrderFactory
 {

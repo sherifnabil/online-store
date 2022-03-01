@@ -4,9 +4,9 @@ use Domains\Customer\Models\User;
 use Domains\Customer\Models\CartItem;
 use Domains\Customer\Models\Location;
 use Domains\Fulfillment\Models\Order;
-use Domains\Customer\Actions\CreateOrder;
 use Domains\Fulfillment\Models\OrderLine;
-use Domains\Customer\ValueObjects\OrderValueObject;
+use Domains\Fulfillment\Actions\CreateOrder;
+use Domains\Fulfillment\ValueObjects\OrderValueObject;
 
 it('can create an order', function () {
     $object = new OrderValueObject(

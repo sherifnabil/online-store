@@ -6,8 +6,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Domains\Customer\Projectors\CartProjector;
-use Domains\Customer\Projectors\OrderProjector;
 use Spatie\EventSourcing\Facades\Projectionist;
+use Domains\Fulfillment\Projectors\OrderProjector;
 
 class EventSourcingServiceProvider extends ServiceProvider
 {

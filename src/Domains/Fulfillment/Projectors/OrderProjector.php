@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Projectors;
+namespace Domains\Fulfillment\Projectors;
 
-use Domains\Customer\Actions\CreateOrder;
-use Domains\Customer\Events\OrderWasCreated;
 use Domains\Customer\Factories\OrderFactory;
+use Domains\Fulfillment\Actions\CreateOrder;
+use Domains\Fulfillment\Events\OrderWasCreated;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class OrderProjector extends Projector
