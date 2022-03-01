@@ -27,7 +27,7 @@ it('can create an order from a cart for an unauthenticated user', function () {
         ]
     )
     ->assertStatus(
-        status: Response::HTTP_CREATED
+        status: Response::HTTP_ACCEPTED
     );
 
     expect(EloquentStoredEvent::query()->get())->toHaveCount(1);
@@ -52,7 +52,7 @@ it('can create an order from a cart for an authenticated user', function () {
         ]
     )
     ->assertStatus(
-        status: Response::HTTP_CREATED
+        status: Response::HTTP_ACCEPTED
     );
 
     expect(EloquentStoredEvent::query()->get())->toHaveCount(1);
