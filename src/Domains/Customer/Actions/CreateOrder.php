@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Domains\Customer\Actions;
 
 use Domains\Customer\Models\Cart;
+use Domains\Customer\Models\CartItem;
 use Domains\Customer\Models\Order;
 use Domains\Customer\States\Statuses\OrderStatus;
 use Domains\Customer\ValueObjects\OrderValueObject;
@@ -28,5 +29,17 @@ class CreateOrder
             'shipping_id'=>  $object->shipping,
             'billing_id'=>  $object->billing,
         ]);
+
+        $cart->items->each(function (CartItem $item) use ($order) {
+            $order->lineItems()->create([
+                'name'              =>  $item->purchasable->name,
+                'description'       =>  $item->purchasable->product->description,
+                'cost'              =>  $item->purchasable->cost,
+                'retail'            =>  $item->purchasable->retail,
+                'quantity'          =>  $item->quantity,
+                'purchasable_id'    =>  $item->purchasable->id,
+                'purchasable_type'  =>   get_class($item->purchasable),
+            ]);
+        });
     }
 }
