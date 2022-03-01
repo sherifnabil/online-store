@@ -6,7 +6,7 @@ namespace Database\Factories;
 
 use Domains\Catalog\Models\Variant;
 use Domains\Fullfillment\Models\Order;
-use Domains\Fullfillment\Models\OrderLine;
+use Domains\Fulfillment\Models\OrderLine;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderLineFactory extends Factory

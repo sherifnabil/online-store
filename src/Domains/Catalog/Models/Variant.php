@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Domains\Catalog\Models;
 
-use Database\Factories\VariantFactory;
-use Domains\Catalog\Models\Builders\VariantBuilder;
 use Domains\Customer\Models\CartItem;
-use Domains\Fullfillment\Models\OrderLine;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Database\Factories\VariantFactory;
 use Illuminate\Database\Eloquent\Model;
+use Domains\Fulfillment\Models\OrderLine;
+use Illuminate\Database\Eloquent\Builder;
+use Domains\Catalog\Models\Builders\VariantBuilder;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
-use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Variant extends Model
 {

@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Domains\Fulfillment\Models;
 
 use Database\Factories\OrderFactory;
-use Domains\Customer\Models\OrderLine;
 use Illuminate\Database\Eloquent\Model;
+use Domains\Fulfillment\Models\OrderLine;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use JustSteveKing\KeyFactory\Models\Concerns\HasKey;

@@ -6,11 +6,11 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Domains\Customer\Models\Cart;
-use Domains\Fullfillment\Models\Order;
 use Domains\Catalog\Models\Variant;
 use Domains\Customer\Models\Coupon;
 use Domains\Customer\Models\Address;
-use Domains\Fullfillment\Models\OrderLine;
+use Domains\Fullfillment\Models\Order;
+use Domains\Fulfillment\Models\OrderLine;
 
 class DatabaseSeeder extends Seeder
 {
