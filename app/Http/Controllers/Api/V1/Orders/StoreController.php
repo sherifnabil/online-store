@@ -30,7 +30,7 @@ class StoreController extends Controller
 
         return new Response(
             content: null,
-            status: Response::HTTP_CREATED
+            status: Response::HTTP_ACCEPTED
         );
     }
 }
