@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Models;
+namespace Domains\Fulfillment\Models;
 
 use Database\Factories\OrderFactory;
 use Domains\Customer\Models\OrderLine;

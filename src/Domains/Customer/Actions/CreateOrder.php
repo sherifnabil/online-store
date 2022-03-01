@@ -6,7 +6,7 @@ namespace Domains\Customer\Actions;
 
 use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
-use Domains\Customer\Models\Order;
+use Domains\Fulfillment\Models\Order;
 use Domains\Customer\States\Statuses\OrderStatus;
 use Domains\Customer\ValueObjects\OrderValueObject;
 

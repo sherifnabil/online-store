@@ -1,13 +1,13 @@
 <?php
 
-use Domains\Customer\Events\OrderWasCreated;
 use Illuminate\Http\Response;
 use function Pest\Laravel\post;
-use Domains\Customer\Models\Order;
-
-use Domains\Customer\Models\CartItem;
-use Domains\Customer\Models\Location;
 use Domains\Customer\Models\User;
+use Domains\Customer\Models\CartItem;
+
+use Domains\Customer\Models\Location;
+use Domains\Fulfillment\Models\Order;
+use Domains\Customer\Events\OrderWasCreated;
 use Spatie\EventSourcing\StoredEvents\Models\EloquentStoredEvent;
 
 it('can create an order from a cart using the API when not loggged in', function () {

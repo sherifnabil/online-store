@@ -1,11 +1,11 @@
 <?php
 
-use Domains\Customer\Actions\CreateOrder;
+use Domains\Customer\Models\User;
 use Domains\Customer\Models\CartItem;
 use Domains\Customer\Models\Location;
-use Domains\Customer\Models\Order;
+use Domains\Fulfillment\Models\Order;
 use Domains\Customer\Models\OrderLine;
-use Domains\Customer\Models\User;
+use Domains\Customer\Actions\CreateOrder;
 use Domains\Customer\ValueObjects\OrderValueObject;
 
 it('can create an order', function () {

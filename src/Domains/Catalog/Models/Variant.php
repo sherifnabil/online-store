@@ -7,7 +7,7 @@ namespace Domains\Catalog\Models;
 use Database\Factories\VariantFactory;
 use Domains\Catalog\Models\Builders\VariantBuilder;
 use Domains\Customer\Models\CartItem;
-use Domains\Customer\Models\OrderLine;
+use Domains\Fullfillment\Models\OrderLine;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
