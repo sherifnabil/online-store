@@ -96,15 +96,15 @@ class CartProjector extends Projector
             $event->cartItemID
         )->first();
 
-
+        // dd($event, $item);
         if ($event->quantity >= $item->quantity) {
             CartAggregate::retrieve(
-                uuid: Str::uuid()->toString()
+                uuid: $item->cart->uuid
             )->removeProduct(
                 purchasableID: $item->purchasable->id,
-                cartID: $item->cart_id,
+                cartID: (int)($item->cart_id),
                 type: get_class($item->purchasable)
-            );
+            )->persist();
             return;
         }
 
