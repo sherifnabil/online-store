@@ -20,6 +20,7 @@ class Order extends Model
 
     protected $fillable = [
         'key',
+        'intent_id',
         'number',
         'state',
         'coupon',

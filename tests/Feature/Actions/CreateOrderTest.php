@@ -14,7 +14,8 @@ it('can create an order', function () {
         billing: $locationId = Location::factory()->create()->id,
         shipping: $locationId,
         user: User::factory()->create()->id,
-        email: null
+        email: null,
+        intent: null
     );
 
     expect(Order::query()->count())->toEqual(0);
