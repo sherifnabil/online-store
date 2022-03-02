@@ -8,6 +8,7 @@ use Domains\Customer\Models\Cart;
 use Domains\Customer\Models\CartItem;
 use Domains\Fulfillment\Models\Order;
 use Domains\Fulfillment\States\Statuses\OrderStatus;
+use Domains\Fulfillment\Support\OrderNumberGenerator;
 use Domains\Fulfillment\ValueObjects\OrderValueObject;
 
 class CreateOrder
@@ -20,7 +21,7 @@ class CreateOrder
         ->first();
 
         $order = Order::query()->create([
-            'number'    => 'random-order-number',
+            'number'    => OrderNumberGenerator::generate(),
             'state'     =>  OrderStatus::pending()->label,
             'coupon'    =>  $cart->coupon,
             'total'     =>  0,
