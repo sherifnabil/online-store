@@ -13,6 +13,10 @@ return new class extends Migration {
             $table->id();
             $table->string('key')->unique();
 
+            $table->string('intent_id')
+                ->comment('intent ID is the payment intent from stripe.')
+                ->nullable()
+                ->unique();
             $table->string('number')->unique();
             $table->string('state')->nullable();
             $table->string('coupon')->nullable();

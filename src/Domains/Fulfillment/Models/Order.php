@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Domains\Customer\Models;
+namespace Domains\Fulfillment\Models;
 
 use Database\Factories\OrderFactory;
-use Domains\Customer\Models\OrderLine;
 use Illuminate\Database\Eloquent\Model;
+use Domains\Fulfillment\Models\OrderLine;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
@@ -20,6 +20,7 @@ class Order extends Model
 
     protected $fillable = [
         'key',
+        'intent_id',
         'number',
         'state',
         'coupon',
@@ -33,8 +34,8 @@ class Order extends Model
     ];
 
     protected $casts = [
-        'shipping_id'   =>  'datetime',
-        'billing_id'    =>  'datetime',
+        'shipping_id'   =>  'integer',
+        'billing_id'    =>  'integer',
     ];
 
     public function user(): BelongsTo

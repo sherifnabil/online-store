@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Domains\Customer\Aggregates;
 
+use Domains\Customer\Events\CouponWasAppied;
 use Domains\Customer\Events\DecreaseCartQuantity;
 use Domains\Customer\Events\IncreaseCartQuantity;
 use Domains\Customer\Events\ProductWasAddedToCart;
@@ -12,7 +13,7 @@ use Spatie\EventSourcing\AggregateRoots\AggregateRoot;
 
 class CartAggregate extends AggregateRoot
 {
-    public function addToCart(int $purchasableID, int $cartID, string $type): self
+    public function addProduct(int $purchasableID, int $cartID, string $type): self
     {
         $this->recordThat(
             domainEvent: new ProductWasAddedToCart(
@@ -55,6 +56,17 @@ class CartAggregate extends AggregateRoot
                 cartID: $cartID,
                 cartItemID: $cartItemID,
                 quantity: $quantity
+            )
+        );
+        return $this;
+    }
+
+    public function applyCoupon(int $cartID, string $code): self
+    {
+        $this->recordThat(
+            domainEvent: new CouponWasAppied(
+                cartID: $cartID,
+                code: $code,
             )
         );
         return $this;

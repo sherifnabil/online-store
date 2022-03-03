@@ -6,7 +6,10 @@ namespace Domains\Customer\Projectors;
 
 use Illuminate\Support\Str;
 use Domains\Customer\Models\Cart;
+use Domains\Customer\Models\Coupon;
 use Domains\Customer\Models\CartItem;
+use Illuminate\Database\Eloquent\Model;
+use Domains\Customer\Events\CouponWasAppied;
 use Domains\Customer\Aggregates\CartAggregate;
 use Domains\Customer\Events\DecreaseCartQuantity;
 use Domains\Customer\Events\IncreaseCartQuantity;
@@ -19,24 +22,49 @@ class CartProjector extends Projector
     public function onProductWasAddedToCart(ProductWasAddedToCart $event): void
     {
         $cart = Cart::query()->find(
-            id: $event->cartID
+            $event->cartID
         );
 
-        $cart->items()->create([
-            'purchasable_id'    =>  $event->productID,
+        $item = $cart->items()->create([
+            'purchasable_id'    =>  $event->purchasableID,
             'purchasable_type'  =>  $event->type,
+        ]);
+
+        $cart->update([
+            'total' =>  $item->purchasable->retail
         ]);
     }
 
     public function onProductWasRemovedFromCart(ProductWasRemovedFromCart $event): void
     {
         $cart = Cart::query()->find(
-            id: $event->cartID
+            $event->cartID
         );
 
-        $cart->items()
-            ->where('purchasable_id', $event->purchasableID)
-            ->where('purchasable_type', $event->type)
+        $items = CartItem::query()
+            ->with(['purchasable'])
+            ->get();
+
+        $item =  $items->filter(
+            fn (Model $item) =>
+            $item->id === $event->purchasableID
+        )
+        ->first();
+
+        if ($cart->count() === 1) {
+            $cart->update([
+                'total' => 0
+            ]);
+        } else {
+            $cart->update([
+                'total' => ($cart->total - $item->purchasable->retail)
+            ]);
+        }
+
+        $cart
+            ->items()
+            ->where('purchasable_id', $item->purchasable->id)
+            ->where('purchasable_type', strtolower(class_basename($item->purchasable)))
             ->delete();
     }
 
@@ -44,11 +72,11 @@ class CartProjector extends Projector
     {
         $item = CartItem::query()
         ->where(
-            column: 'cart_id',
-            value: $event->cartID
+            'cart_id',
+            $event->cartID
         )->where(
-            column: 'id',
-            value: $event->cartItemID
+            'id',
+            $event->cartItemID
         )->first();
 
         $item->update([
@@ -60,26 +88,39 @@ class CartProjector extends Projector
     {
         $item = CartItem::query()
         ->where(
-            column: 'cart_id',
-            value: $event->cartID
-        )->where(
-            column: 'id',
-            value: $event->cartItemID
+            'cart_id',
+            $event->cartID
+        )
+        ->where(
+            'id',
+            $event->cartItemID
         )->first();
 
+        // dd($event, $item);
         if ($event->quantity >= $item->quantity) {
             CartAggregate::retrieve(
-                uuid: Str::uuid()->toString()
+                uuid: $item->cart->uuid
             )->removeProduct(
                 purchasableID: $item->purchasable->id,
-                cartID: $item->cart_id,
+                cartID: (int)($item->cart_id),
                 type: get_class($item->purchasable)
-            );
+            )->persist();
             return;
         }
 
         $item->update([
             'quantity'  => ($item->quantity - $event->quantity)
+        ]);
+    }
+
+    public function onCouponWasAppied(CouponWasAppied $event): void
+    {
+        $coupon = Coupon::query()->where('code', $event->code)->first();
+
+        $cart = Cart::query()->find($event->cartID)
+        ->update([
+            'coupon'        =>  $coupon->code,
+            'reduction'     =>  $coupon->reduction,
         ]);
     }
 }
