@@ -19,7 +19,8 @@ it('can create an order for an unauthenticated user', function () {
             billing:    $location->id,
             shipping:   $location->id,
             user:       null,
-            email:      'someemail@mail.com'
+            email:      'someemail@mail.com',
+            intent:     '1234',
         )
     )->when(
         callable: function (OrderAggregate $aggregate) use ($item, $location) {
@@ -28,7 +29,8 @@ it('can create an order for an unauthenticated user', function () {
                 billing:    $location->id,
                 shipping:   $location->id,
                 user:       null,
-                email:      'someemail@mail.com'
+                email:      'someemail@mail.com',
+                intent:     '1234',
             );
         }
     )->assertRecorded(
@@ -37,7 +39,8 @@ it('can create an order for an unauthenticated user', function () {
             billing:    $location->id,
             shipping:   $location->id,
             user:       null,
-            email:      'someemail@mail.com'
+            email:      'someemail@mail.com',
+            intent:     '1234',
         )
     );
 });
@@ -55,7 +58,8 @@ it('can create an order for an authenticated user', function () {
             billing:    $location->id,
             shipping:   $location->id,
             user:       auth()->id(),
-            email:      null
+            email:      null,
+            intent:     '1234',
         )
     )->when(
         callable: function (OrderAggregate $aggregate) use ($item, $location) {
@@ -64,7 +68,8 @@ it('can create an order for an authenticated user', function () {
                 billing:    $location->id,
                 shipping:   $location->id,
                 user:       auth()->id(),
-                email:      null
+                email:      null,
+                intent:     '1234',
             );
         }
     )->assertRecorded(
@@ -73,7 +78,8 @@ it('can create an order for an authenticated user', function () {
             billing:    $location->id,
             shipping:   $location->id,
             user:       auth()->id(),
-            email:      null
+            email:      null,
+            intent:     '1234',
         )
     );
 });

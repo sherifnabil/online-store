@@ -13,7 +13,8 @@ class OrderWasCreated extends ShouldBeStored
         public int $billing,
         public int $shipping,
         public null|int $user,
-        public null|string $email
+        public null|string $email,
+        public string $intent
     ) {
     }
 }

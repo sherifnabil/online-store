@@ -14,7 +14,8 @@ class OrderAggregate extends AggregateRoot
         int $billing,
         int $shipping,
         null|int $user,
-        null|string $email
+        null|string $email,
+        string $intent
     ): self {
         $this->recordThat(
             domainEvent: new OrderWasCreated(
@@ -22,7 +23,8 @@ class OrderAggregate extends AggregateRoot
                 billing: $billing,
                 shipping: $shipping,
                 user: $user,
-                email: $email
+                email: $email,
+                intent: $intent
             ),
         );
 

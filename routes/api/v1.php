@@ -6,11 +6,12 @@ use App\Http\Controllers\Api\V1\Carts\IndexController;
 use App\Http\Controllers\Api\V1\Carts\CreateController;
 use App\Http\Controllers\Api\V1\Products\ShowController;
 use App\Http\Controllers\Api\V1\Carts\Products\StoreController;
-use App\Http\Controllers\Api\V1\Carts\Coupons\StoreController as CouponsStoreController;
+use App\Http\Controllers\Api\V1\Orders\StripeWebhookController;
 use App\Http\Controllers\Api\V1\Carts\Products\DeleteController;
-use App\Http\Controllers\Api\V1\Carts\Coupons\DeleteController as CouponsDeleteController;
 use App\Http\Controllers\Api\V1\Carts\Products\UpdateController;
 use App\Http\Controllers\Api\V1\Products\IndexController as ProductsIndexController;
+use App\Http\Controllers\Api\V1\Carts\Coupons\StoreController as CouponsStoreController;
+use App\Http\Controllers\Api\V1\Carts\Coupons\DeleteController as CouponsDeleteController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
@@ -83,4 +84,11 @@ Route::prefix('orders')->as('orders:')->group(function () {
      * Turning a Cart into an Order
     */
     Route::post('/', App\Http\Controllers\Api\V1\Orders\StoreController::class)->name('store');
+});
+
+/**
+ * Stripe Webhooks
+ */
+Route::middleware(['stripe-webhooks'])->group(function () {
+    Route::post('stripe/webhooks', StripeWebhookController::class)->name('stripe:webhooks');
 });

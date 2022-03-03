@@ -17,7 +17,8 @@
         "spatie/enum": "^3.10",
         "spatie/laravel-enum": "^2.5",
         "spatie/laravel-event-sourcing": "^5.0",
-        "spatie/laravel-query-builder": "^4.0"
+        "spatie/laravel-query-builder": "^4.0",
+        "stripe/stripe-php": "^7.116"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

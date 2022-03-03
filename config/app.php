@@ -166,6 +166,7 @@ return [
          * Package Service Providers...
          */
 
+        App\Providers\StripeServiceProvider::class,
         App\Providers\EventSourcingServiceProvider::class,
         /*
          * Application Service Providers...

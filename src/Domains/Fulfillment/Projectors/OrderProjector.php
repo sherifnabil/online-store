@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Domains\Fulfillment\Projectors;
 
-use Domains\Customer\Factories\OrderFactory;
 use Domains\Fulfillment\Actions\CreateOrder;
 use Domains\Fulfillment\Events\OrderWasCreated;
+use Domains\Fulfillment\Factories\OrderFactory;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class OrderProjector extends Projector
@@ -19,7 +19,8 @@ class OrderProjector extends Projector
                 'billing' => $event->billing,
                 'shipping'=> $event->shipping,
                 'user'    => $event->user,
-                'email'   => $event->email
+                'email'   => $event->email,
+                'intent'  => '1234',
             ]
         );
 
