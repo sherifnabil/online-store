@@ -24,6 +24,7 @@ it('can create an order from a cart for an unauthenticated user', function () {
             'email'     =>  'email@email.com',
             'shipping'  =>  $location->id,
             'billing'   =>  $location->id,
+            'intent'    =>  '1234',
         ]
     )
     ->assertStatus(
@@ -49,6 +50,7 @@ it('can create an order from a cart for an authenticated user', function () {
             'cart'      =>  $cartItem->cart->uuid,
             'shipping'  =>  $location->id,
             'billing'   =>  $location->id,
+            'intent'    =>  '1234',
         ]
     )
     ->assertStatus(

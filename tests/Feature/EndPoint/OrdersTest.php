@@ -24,6 +24,7 @@ it('can create an order from a cart using the API when not loggged in', function
             'email' =>  'someemail@mail.com',
             'shipping'  =>  $location->id,
             'billing'  =>  $location->id,
+            'intent'  =>  '1234',
         ]
     )->assertStatus(
         status: Response::HTTP_ACCEPTED
@@ -48,6 +49,7 @@ it('can create an order from a cart using the API when loggged in', function () 
             'cart'      =>  $item->cart->uuid,
             'shipping'  =>  $location->id,
             'billing'   =>  $location->id,
+            'intent'  =>  '1234',
         ]
     )->assertStatus(
         status: Response::HTTP_ACCEPTED
