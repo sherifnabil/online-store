@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\V1\Orders;
 
-use App\Http\Controllers\Controller;
-use App\Jobs\Stripe\ProcessPaymentIntent;
-use Domains\Fulfillment\Factories\Stripe\PaymentIntentFactory;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Domains\Fulfillment\Jobs\Stripe\ProcessPaymentIntent;
+use Domains\Fulfillment\Factories\Stripe\PaymentIntentFactory;
+use Domains\Fulfillment\Models\Order;
 
 class StripeWebhookController extends Controller
 {

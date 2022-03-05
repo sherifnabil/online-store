@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Domains\Fulfillment\Projectors;
 
+use Domains\Fulfillment\Models\Order;
 use Domains\Fulfillment\Actions\CreateOrder;
 use Domains\Fulfillment\Events\OrderWasCreated;
 use Domains\Fulfillment\Factories\OrderFactory;
+use Domains\Fulfillment\Actions\UpdateOrderState;
+use Domains\Fulfillment\Events\OrderStateWasUpdated;
 use Spatie\EventSourcing\EventHandlers\Projectors\Projector;
 
 class OrderProjector extends Projector
@@ -26,6 +29,15 @@ class OrderProjector extends Projector
 
         CreateOrder::handle(
             object: $object
+        );
+    }
+
+    public function onOrderStatusWasUpdated(OrderStateWasUpdated $event): void
+    {
+        $order = Order::query()->find($event->id);
+        UpdateOrderState::handle(
+            order: $order,
+            state: $event->state
         );
     }
 }
