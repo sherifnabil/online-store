@@ -7,7 +7,7 @@ namespace Database\Factories;
 use Illuminate\Support\Arr;
 use Domains\Customer\Models\User;
 use Domains\Customer\Models\Location;
-use Domains\Fullfillment\Models\Order;
+use Domains\Fulfillment\Models\Order;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Domains\Fulfillment\States\Statuses\OrderStatus;
 
