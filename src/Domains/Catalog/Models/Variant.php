@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Domains\Catalog\Models;
 
 use Domains\Customer\Models\CartItem;
+use Domains\Customer\Models\Wishlist;
 use Database\Factories\VariantFactory;
 use Illuminate\Database\Eloquent\Model;
 use Domains\Fulfillment\Models\OrderLine;
@@ -15,6 +16,7 @@ use JustSteveKing\KeyFactory\Models\Concerns\HasKey;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Variant extends Model
 {
@@ -61,6 +63,14 @@ class Variant extends Model
         return $this->morphMany(
             related: OrderLine::class,
             name: 'purchasable'
+        );
+    }
+
+    public function wishlists(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            related: Wishlist::class,
+            table: 'variant_wishlist'
         );
     }
 
